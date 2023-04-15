@@ -14,7 +14,10 @@
 vals = {"X":0,"Y":0,"Z":0}
 
 for key in vals.keys():
-    print("Input " + key)
-    vals[key] = float(input())
+    inp = ""
+    while not inp.isdecimal():
+        print("Input " + key)
+        inp = input()
+    vals[key] = float(inp)
 
 print("Max = " + str(max(vals.values())))
