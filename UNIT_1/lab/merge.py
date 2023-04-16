@@ -1,7 +1,6 @@
 from argparse import ArgumentParser
 import logging
 import os
-import sys
 from pathlib import Path
 import json
 
