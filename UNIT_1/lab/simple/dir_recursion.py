@@ -15,11 +15,5 @@ def find_files(catalog, f):
         print(files)
         find_files += [os.path.join(root, name) for name in files if name == f]
     return find_files
-def find_files_by_ext(catalog, ext):
-    find_files = []
-    for root, dirs, files in os.walk(catalog):
-        print(files)
-        find_files += [os.path.join(root, name) for name in files if name.endswith('.txt')]
-    return find_files
 
 print(find_files(sys.argv[1], sys.argv[2]))
