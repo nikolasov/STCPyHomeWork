@@ -24,8 +24,9 @@
 #Нет такой буквы.
 #У вас осталось 9 попыток !
 #Введите букву:
-words = ["оператор","тест"]
-desc_ = [ "Это слово обозначает наименьшую автономную часть языка программирования","Проверка корректности"]
+words = ["оператор","перспектива"]
+desc_ = [ "Это слово обозначает наименьшую автономную часть языка программирования",
+         "Изображение трёхмерной фигуры на так называемой картинной (проекционной) плоскости"]
 stop_word = "!q"
 game_step_message = "Введите букву или " + stop_word +" для окончания игры:"
 
@@ -62,7 +63,7 @@ def start_game(id):
     if id >= len(words):
         return "Вышли за границы массива"
     n_steps     = 10
-    word        = words[id]
+    word        = words[id].lower()
     description = desc_[id]
     template    = ["▒"]*len(word)
     literal     = " "
@@ -70,7 +71,7 @@ def start_game(id):
     while (not check_result(template)) and n_steps>0 :
         print(" ".join(lit for lit in template))
         print(game_step_message, end=" ")
-        literal = input()
+        literal = input().lower()
         if literal == stop_word:
             break
         result = check_template(literal,word,template,n_steps)
