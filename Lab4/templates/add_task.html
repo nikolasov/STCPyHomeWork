@@ -1,0 +1,46 @@
+<html lang="ru" >
+<head>
+<meta charset="utf-8">
+<title>Добавить задачу</title>
+<link rel="stylesheet" href="{{ url_for('static',
+filename='css/default.css') }}">
+</head>
+<body>
+<div class="rendered-form">
+    <div class="formbuilder-text form-group field-text-1684342975367">
+        <label for="text-1684342975367" class="formbuilder-text-label">Преподаватель
+            <br>
+        </label>
+        <input type="text" class="form-control" name="text-1684342975367" access="false" id="text-1684342975367">
+    </div>
+    <div class="formbuilder-select form-group field-select-1684343059734">
+        <label for="select-1684343059734" class="formbuilder-select-label">Категории</label>
+        <select class="form-control" name="select-1684343059734" id="select-1684343059734">
+            <option value="option-1" selected="true" id="select-1684343059734-0">Option 1</option>
+            <option value="option-2" id="select-1684343059734-1">Option 2</option>
+        </select>
+    </div>
+    <div class="formbuilder-text form-group field-text-1684342861774">
+        <label for="text-1684342861774" class="formbuilder-text-label">Формулировака
+            <br><span class="formbuilder-required">*</span></label>
+        <input type="text" class="form-control" name="text-1684342861774" access="false" id="text-1684342861774" required="required" aria-required="true">
+    </div>
+    <div class="formbuilder-number form-group field-number-1684343317476">
+        <label for="number-1684343317476" class="formbuilder-number-label">Сложность
+            <br><span class="formbuilder-required">*</span></label>
+        <input type="number" class="form-control" name="number-1684343317476" access="false" id="number-1684343317476" required="required" aria-required="true">
+    </div>
+    <div class="formbuilder-textarea form-group field-textarea-1684342927667">
+        <label for="textarea-1684342927667" class="formbuilder-textarea-label">Описание
+            <br>
+        </label>
+        <textarea type="textarea" class="form-control" name="textarea-1684342927667" access="false" id="textarea-1684342927667"></textarea>
+    </div>
+    <div class="formbuilder-button form-group field-button-1684342850776">
+        <button type="button" class="btn-default btn" name="button-1684342850776" access="false" style="default" id="button-1684342850776">Add
+            <br>
+        </button>
+    </div>
+</div>
+</body>
+</html>
