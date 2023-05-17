@@ -6,6 +6,7 @@
 filename='css/default.css') }}">
 </head>
 <body>
+<form action="/handler_form" method="POST">
 <div class="rendered-form">
     <div class="formbuilder-text form-group field-text-1684342975367">
         <label for="text-1684342975367" class="formbuilder-text-label">Преподаватель
@@ -16,8 +17,9 @@ filename='css/default.css') }}">
     <div class="formbuilder-select form-group field-select-1684343059734">
         <label for="select-1684343059734" class="formbuilder-select-label">Категории</label>
         <select class="form-control" name="select-1684343059734" id="select-1684343059734">
-            <option value="option-1" selected="true" id="select-1684343059734-0">Option 1</option>
-            <option value="option-2" id="select-1684343059734-1">Option 2</option>
+            {% for item in navigation %}
+                <option   value="{{ item[1]}}" id="{{ item[0] }}">{{ item[1] }}</option>
+    	    {% endfor %}
         </select>
     </div>
     <div class="formbuilder-text form-group field-text-1684342861774">
@@ -37,10 +39,9 @@ filename='css/default.css') }}">
         <textarea type="textarea" class="form-control" name="textarea-1684342927667" access="false" id="textarea-1684342927667"></textarea>
     </div>
     <div class="formbuilder-button form-group field-button-1684342850776">
-        <button type="button" class="btn-default btn" name="button-1684342850776" access="false" style="default" id="button-1684342850776">Add
-            <br>
-        </button>
+        <button>Add   </button>
     </div>
 </div>
+</form>
 </body>
 </html>
