@@ -1,0 +1,15 @@
+<form action="/add_genre"  method="POST">
+    <div class="form_grid">
+            <label for="add_genre" class="">Добавленные жанры: </label>
+            <select class="form-control" name="add_genre">
+                {% for item in status.genres %}
+                    <option   value="{{ item[0] }}" id="genre_{{ item[0] }}" >{{ item[1] }}_({{ item[0] }})</option>
+                {% endfor %}
+            </select>
+            <label for="genre_name" class="">Жанр: </label>
+            <input type="text" class="form-control" name="genre_name" access="false" id="genre_name" required="required" aria-required="true">
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>

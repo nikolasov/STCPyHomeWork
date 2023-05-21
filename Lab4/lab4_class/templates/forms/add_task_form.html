@@ -1,0 +1,22 @@
+<form action="/handler_form" method="POST">
+    <div class="form_add_task">
+            <label for="task_cat" class="">Категории: </label>
+            <select class="form-control" name="task_cat" id="task_cat">
+                {% for item in navigation %}
+                    <option   value="{{ item[0] }}" id="task_cat_{{ item[0] }}" {{ 'selected' if status.id_cat|int == item[0] }} >{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="task_name" class="formbuilder-text-label">Формулировака*:</label>
+            <input type="text" class="form-control" name="task_name" access="false" id="task_name" required="required" aria-required="true">
+
+            <label for="task_status" >Сложность*:</label>
+            <input type="number" class="form-control" name="task_status" access="false" id="task_status" , min="1" max="10",required="required" aria-required="true">
+
+            <label for="task_desc" >Описание: </label>
+            <textarea type="textarea" class="form-control" name="task_desc" access="false" id="task_desc"></textarea>
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>

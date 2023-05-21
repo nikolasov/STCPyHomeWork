@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block title %}Книжные жанры{% endblock %}
+{% block content %}
+    {% if status.code == 1 %}
+        {% include 'status/success.html' %}
+    {% endif %}
+    {% if status.code == 2 %}
+        {% include 'status/allert.html' %}
+    {% endif %}
+    {% if status.code == 0 %}
+        {% include 'status/error.html' %}
+    {% endif %}
+    <h1>Добавить Жанр:</h1>
+    {% include '/forms/add_genre_form.html' %}
+{% endblock %}
+{% block footer %}
+        {{super()}}
+        <p>Жанры</p>
+{% endblock %}

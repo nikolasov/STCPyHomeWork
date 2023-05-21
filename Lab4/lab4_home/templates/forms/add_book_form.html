@@ -1,0 +1,73 @@
+<form action="/add_book"  method="POST">
+    <div class="book_form">
+            <label for="book_name" class="">Имя книги: </label>
+            <input type="text" class="form-control book_name_input" name="book_name" access="false" id="book_name" required="required" aria-required="true">
+            
+            <label for="book_author_1" class="">Автор 1*: </label>
+            <input type="text" class="form-control" name="book_author_1" access="false" id="book_author_1" required="required" aria-required="true">
+            <select class="form-control" name="author_selection_1" id="author_selection_1" onchange="select_func('author_selection_1','book_author_1')">
+                {% for item in status.authors %}
+                    <option   value="{{ item[0] }}" id="author_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="book_author_2" class="">Автор 2: </label>
+            <input type="text" class="form-control" name="book_author_2" access="false" id="book_author_2" aria-required="true">
+            <select class="form-control" name="author_selection_2" id="author_selection_2" onchange="select_func('author_selection_2','book_author_2')">
+                {% for item in status.authors %}
+                    <option   value="{{ item[0] }}" id="genre_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="genre_name_1" class="">Жанр 1*: </label>
+            <input type="text" class="form-control" name="genre_name_1" access="false" id="genre_name_1" required="required" aria-required="true">
+            <select class="form-control" name="genre_selection_1" id="genre_selection_1" onchange="select_func('genre_selection_1','genre_name_1')">
+                {% for item in status.genres %}
+                    <option   value="{{ item[0] }}" id="genre_{{ item[0] }}" name="{{ item[1] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="genre_name_2" class="">Жанр 2: </label>
+            <input type="text" class="form-control" name="genre_name_2" access="false" id="genre_name_2"  aria-required="true">
+            <select class="form-control" name="genre_selection_2" id="genre_selection_2" onchange="select_func('genre_selection_2','genre_name_2')">
+                {% for item in status.genres %}
+                    <option   value="{{ item[0] }}" id="genre_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="genre_name_3" class="">Жанр 3: </label>
+            <input type="text" class="form-control" name="genre_name_3" access="false" id="genre_name_3"  aria-required="true">
+            <select class="form-control" name="genre_selection_3" id="genre_selection_3" onchange="select_func('genre_selection_3','genre_name_3')">
+                {% for item in status.genres %}
+                    <option   value="{{ item[0] }}" id="genre_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="publish_name" class="">Издатель: </label>
+            <input type="text" class="form-control" name="publish_name" access="false" id="publish_name"  aria-required="true">
+            <select class="form-control" name="publish_selection" id="publish_selection" onchange="select_func('publish_selection','publish_name')">
+                {% for item in status.publishs %}
+                    <option   value="{{ item[0] }}" id="publish_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="place_desc" class="">Куда поставить ?* </label>
+            <input type="text" class="form-control" name="place_desc" access="false" id="place_desc" required="required" aria-required="true">
+            <select class="form-control" name="place_selection" id="place_selection" onchange="select_func('place_selection','place_desc')">
+                {% for item in status.places %}
+                    <option   value="{{ item[0] }}" id="place_{{ item[0] }}" name="{{ item[1] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>
+<script>
+    function select_func(select_id, input_id){
+        var sel=document.getElementById(select_id).selectedIndex;
+        var options=document.getElementById(select_id).options;
+        var element_input = document.getElementById(input_id)
+        element_input.value = options[sel].text
+    }
+</script>

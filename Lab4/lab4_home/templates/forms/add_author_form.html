@@ -1,0 +1,15 @@
+<form action="/add_author"  method="POST">
+    <div class="form_grid">
+            <label for="existing_authors" class="">Добавленные авторы: </label>
+            <select class="form-control" name="existing_authors">
+                {% for item in status.authors %}
+                    <option   value="{{ item[0] }}" id="author_{{ item[0] }}" >{{ item[1] }}_({{ item[0] }})</option>
+                {% endfor %}
+            </select>
+            <label for="author_name" class="">Имя автора: </label>
+            <input type="text" class="form-control" name="author_name" access="false" id="author_name" required="required" aria-required="true">
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>

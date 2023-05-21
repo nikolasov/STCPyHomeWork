@@ -1,0 +1,15 @@
+<form action="/add_publish"  method="POST">
+    <div class="form_grid">
+            <label for="existing_publish" class="">Добавленные издатели: </label>
+            <select class="form-control" name="existing_publish">
+                {% for item in status.publishs %}
+                    <option   value="{{ item[0] }}" id="publish_{{ item[0] }}" >{{ item[1] }}_({{ item[0] }})</option>
+                {% endfor %}
+            </select>
+            <label for="publish_name" class="">Издательство: </label>
+            <input type="text" class="form-control" name="publish_name" access="false" id="publish_name" required="required" aria-required="true">
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>

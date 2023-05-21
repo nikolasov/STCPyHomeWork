@@ -13,12 +13,12 @@
 # Создать интерфейсы ввода GUI согласно бизнес логики.
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import insert, select, update
+from sqlalchemy import insert, select, update,Column
 from sqlalchemy import func
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] ='postgresql://user1:123@localhost:5432/check_tasks'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://psql_user:12345678@127.0.0.1:5432/test'
 db = SQLAlchemy(app)
 
 
@@ -33,8 +33,8 @@ group_student = db.Table(
 teacher_group = db.Table(
     'teacher_group',
     db.Column('id_groups', db.Integer(), db.ForeignKey('group.id',ondelete="CASCADE"), primary_key=True,nullable=False),
-    db.Column('id_teachers', db.Integer(), db.ForeignKey('teacher.id',ondelete="CASCADE"), primary_key=True,nullable=False)
-    ,db.Index('idx_teacher_group__id_teachers','id_teachers')
+    db.Column('id_teachers', db.Integer(), db.ForeignKey('teacher.id',ondelete="CASCADE"), primary_key=True,nullable=False),
+    db.Index('idx_teacher_group__id_teachers','id_teachers')
 )
 
 
@@ -58,7 +58,7 @@ category_group = db.Table(
 
 class Task(db.Model):
     __tablename__ = 'task'
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer(),primary_key=True, unique=True,autoincrement=True)
     id_category = db.Column(db.ForeignKey('category.id', ondelete="CASCADE"), nullable=False)
     id_task_students = db.relationship('Student',secondary=task_student, back_populates='id_task_students', uselist=False)
     status = db.Column(db.Integer)  # статус 1 - 10
@@ -68,7 +68,7 @@ db.Index('idx_task__id_category',Task.id_category)
 
 class Category(db.Model):
     __tablename__ = 'category'
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     id_task = db.relationship('Task', backref="category", uselist=False)
     id_teacher = db.Column(db.ForeignKey('teacher.id', ondelete="CASCADE"), nullable=False)
     id_category_groups = db.relationship('Group',secondary=category_group, back_populates='id_category_groups', uselist=False)
@@ -78,14 +78,14 @@ db.Index('idx_category__id_teacher',Category.id_teacher)
 
 class Teacher(db.Model):
     __tablename__= 'teacher'
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     id_teacher_groups = db.relationship('Group',secondary=teacher_group, back_populates='id_teacher_groups', uselist=False)
     name = db.Column(db.String(255),nullable=False)
     
 
 class Student(db.Model):
     __tablename__= 'student'
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     id_task_students = db.relationship('Task',secondary=task_student, back_populates='id_task_students', uselist=False)
     id_student_groups = db.relationship('Group',secondary=group_student, back_populates='id_student_groups', uselist=False)
     name = db.Column(db.String(255),nullable=False)
@@ -93,7 +93,7 @@ class Student(db.Model):
 
 class Group(db.Model):
     __tablename__ = 'group'
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     id_student_groups = db.relationship('Student', secondary=group_student,  back_populates='id_student_groups', uselist=False)
     id_teacher_groups = db.relationship('Teacher', secondary=teacher_group,  back_populates='id_teacher_groups', uselist=False)
     id_category_groups = db.relationship('Category',secondary=category_group, back_populates='id_category_groups', uselist=False)
@@ -214,44 +214,44 @@ if __name__ == '__main__':
         try:
             db.session.add(Teacher(id=1, name='Федоров Федер'))
             db.session.add_all([
-                Student(id=1, name="Миронова Софья"),
-                Student(id=2, name="Андрианов Филипп"),
-                Student(id=3, name="Александров Лев"),
-                Student(id=4, name="Жданов Константин"),
-                Student(id=5, name="Бирюков Мирон"),
-                Student(id=6, name="Кошелева Елизавета"),
-                Student(id=7, name="Захаров Даниил"),
-                Student(id=8, name="Платонов Пётр"),
-                Student(id=9, name="Герасимов Даниил"),
-                Student(id=10, name="Моисеев Мирон"),
-                Student(id=11, name="Ермаков Иван"),
-                Student(id=12, name="Григорьев Кирилл"),
-                Student(id=13, name="Иванова Ксения"),
-                Student(id=14, name="Попова София"),
-                Student(id=15, name="Владимиров Денис"),
-                Student(id=16, name="Власов Константин"),
-                Student(id=17, name="Ковалева Виктория"),
-                Student(id=18, name="Петров Сергей"),
-                Student(id=19, name="Поляков Макар"),
-                Student(id=20, name="Егорова Елизавета")])
-            db.session.add_all([Group(id=1, name="А"),
-                                Group(id=2, name="Б"),
-                                Group(id=3, name="В")])
+                Student(name="Миронова Софья"),
+                Student(name="Андрианов Филипп"),
+                Student(name="Александров Лев"),
+                Student(name="Жданов Константин"),
+                Student(name="Бирюков Мирон"),
+                Student(name="Кошелева Елизавета"),
+                Student(name="Захаров Даниил"),
+                Student(name="Платонов Пётр"),
+                Student(name="Герасимов Даниил"),
+                Student(name="Моисеев Мирон"),
+                Student(name="Ермаков Иван"),
+                Student(name="Григорьев Кирилл"),
+                Student(name="Иванова Ксения"),
+                Student(name="Попова София"),
+                Student(name="Владимиров Денис"),
+                Student(name="Власов Константин"),
+                Student(name="Ковалева Виктория"),
+                Student(name="Петров Сергей"),
+                Student(name="Поляков Макар"),
+                Student(name="Егорова Елизавета")])
+            db.session.add_all([Group(name="А"),
+                                Group(name="Б"),
+                                Group(name="В")])
             db.session.commit()
             db.session.add_all([
-                Category(id=1, name="1 - Вводная лекция", id_teacher=1),
-                Category(id=2, name="2 - Основы SQL", id_teacher=1),
-                Category(id=3, name="3 - Архитектура БД", id_teacher=1),
-                Category(id=4, name="4 - Тест", id_teacher=1)])
+                Category(name="1 - Вводная лекция", id_teacher=1),
+                Category(name="2 - Основы SQL", id_teacher=1),
+                Category(name="3 - Архитектура БД", id_teacher=1),
+                Category(name="4 - Тест", id_teacher=1)])
             db.session.commit()
             db.session.add_all([
-                Task(id=1, id_category=1, status=1, name="Д3_1", description="Ознакомиться с основными командами sql"),
-                Task(id=2, id_category=2, status=1, name="Лаба_1", description="Настроить сервер базы данных"),
-                Task(id=3, id_category=2, status=1, name="ДЗ_2",
+                Task(id_category=1, status=1, name="Д3_1", description="Ознакомиться с основными командами sql"),
+                Task(id_category=2, status=1, name="Лаба_1", description="Настроить сервер базы данных"),
+                Task(id_category=2, status=1, name="ДЗ_2",
                      description="Создать тестовую таблицу, реализовать несколько запросов SELECT"),
-                Task(id=4, id_category=3, status=2, name="ДЗ_3",
+                Task(id_category=3, status=2, name="ДЗ_3",
                      description="Проработать архитектуру базы данных и реализовать заданные запросы"),
-                Task(id=5, id_category=4, status=3, name="Тест_1", description="Решить тестовую задачу")])
+                Task(id_category=4, status=3, name="Тест_1", description="Решить тестовую задачу")])
             db.session.commit()
             with db.session.connection() as conn:
                 conn.execute(
@@ -277,7 +277,7 @@ if __name__ == '__main__':
                                           [{'id_students': i, 'id_tasks': j, 'solved': False} for i in range(3, 21, 3)
                                            for j in range(1, 6)],
                 )
-                conn.commit()
+                db.session.commit()
         except Exception as ex:
             print('----------')
             print(ex)

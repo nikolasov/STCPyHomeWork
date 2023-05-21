@@ -1,0 +1,15 @@
+<form action="/add_place"  method="POST">
+    <div class="form_grid">
+            <label for="existing_places" class="">Добавленные позиции: </label>
+            <select class="form-control" name="existing_places">
+                {% for item in status.places %}
+                    <option   value="{{ item[0] }}" id="place_{{ item[0] }}" >{{ item[1] }}_({{ item[0] }})</option>
+                {% endfor %}
+            </select>
+            <label for="place_desc" class="">Описание места: </label>
+            <input type="text" class="form-control" name="place_desc" access="false" id="place_desc" required="required" aria-required="true">
+
+            <button>Add</button>
+        </div>
+    </div>
+</form>

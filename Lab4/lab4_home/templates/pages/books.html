@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+{% block title %}Книги{% endblock %}
+{% block content %}
+    {% if status.code == 1 %}
+        {% include 'status/success.html' %}
+    {% endif %}
+    {% if status.code == 2 %}
+        {% include 'status/allert.html' %}
+    {% endif %}
+    {% if status.code == 0 %}
+        {% include 'status/error.html' %}
+    {% endif %}
+    <h1>Добавить Книги:</h1>
+    {% include '/forms/add_book_form.html' %}
+{% endblock %}
+{% block footer %}
+        {{super()}}
+        <p>Книги</p>
+{% endblock %}
