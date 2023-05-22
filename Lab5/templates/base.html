@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+{% block head %}
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/default.css') }}">
+{% endblock %}
+</head>
+<body>
+<header>
+    {% block header %}{% endblock %}
+</header>
+<section>
+    {% include 'nav.html' %}
+<article>
+    {% block content %}{% endblock %}
+</article>
+</section>
+
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
+<script src="{{ url_for('static',filename='js/default.js') }}"></script>
+</body>
+</html>
