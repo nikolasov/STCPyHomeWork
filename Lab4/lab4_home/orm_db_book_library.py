@@ -103,6 +103,8 @@ def select_books_by_publish_id(publish_id:int):
                       .join_from(book_publishing,Publishing)
                       .join(Place).where(Publishing.id == publish_id)).all()   
 
+
+
 def select_all_publish():
     return db.session.execute(select(Publishing.id, Publishing.name)).all()
 def select_all_authors():
@@ -272,5 +274,23 @@ if __name__ == '__main__':
                     for v in t:
                         print(v)
                     print("---------------")
+        except Exception as ex:
+            print(ex)
+        
+        # Пример вывода общей сводной таблицы книг
+        try:
+            data = dict()
+            for item in db.session.execute(select(Book.id,Book.name,Author.name,Publishing.name,Genre.name,Place.description).
+                                           join(Book.id_book_author).
+                                           join(Book.id_book_publishing).
+                                           join(Book.id_book_genre).
+                                           join(Place).options().group_by(Book.id,Book.name,Place.description,Genre.name,Author.name,Publishing.name)).all():
+                if item.id in data:
+                    data[item.id][1]=data[item.id][1]+", "+item[2]  
+                else:
+                    data[item.id] = [item[i] for i  in range(1,len(item))]
+            
+            for key, val in data.items():
+                print(f"{key}:{val}")
         except Exception as ex:
             print(ex)
