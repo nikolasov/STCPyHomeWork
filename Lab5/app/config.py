@@ -13,10 +13,10 @@ class Settings(BaseSettings):
         env_file = './.env'
 
 
-settings = Settings()
-settings.POSTGRES_DB = 'check_tasks'
-settings.DATABASE_PORT = 5432
-settings.POSTGRES_USER = 'user1'
-settings.POSTGRES_PASSWORD = '123'
-settings.POSTGRES_HOSTNAME = 'localhost'
-settings.POSTGRES_HOST = '127.0.0.1'
+settings = Settings( POSTGRES_DB = 'test'
+                    ,DATABASE_PORT = 5432
+                    ,POSTGRES_USER = 'psql_user'
+                    ,POSTGRES_PASSWORD = str(12345678)
+                    ,POSTGRES_HOSTNAME = 'localhost'
+                    ,POSTGRES_HOST = '127.0.0.1'  
+                    )
